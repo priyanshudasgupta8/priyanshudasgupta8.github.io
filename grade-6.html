@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Projects-Grd.6</title>
+    <div class=topnav>
+      <a href="index.html">Back to Home </a> |
+    </div>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body><br>
+    <h2>Projects from Grade 6</h2>
+    <ul>
+      <li>Click the button to get a time-based greeting.
+
+      <button onclick="myFunction()">Try it</button>
+
+      <p id="demo"></p>
+
+      <script>
+        function myFunction() {
+          var time = new Date().getHours();
+          var greeting;
+          if (time < 12) {
+            greeting = "Good morning";
+          } else if (time < 14) {
+            greeting = "Good day";
+          } else if (time < 18){
+            greeting ="Good evening";
+          } else{
+            greeting ="Good night";
+          }
+          document.getElementById("demo").innerHTML = greeting;
+        }
+        </script></li>
+    </ul>
+  </body>
+</html>

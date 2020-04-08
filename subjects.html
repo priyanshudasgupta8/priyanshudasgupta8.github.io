@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Favorite Subjects</title>
+    <div class="topnav">
+      <a href="index.html">Home Page </a> |
+      <a href="soccer.html">Soccer </a> |
+      <a href="subjects.html">Favorite Subjects </a> |
+      <div class="dropdown">
+        <button class="dropbtn">Projects</button>
+        <div class="dropdown-content">
+          <a href="grade-6.html">Grade 6</a>
+          <a href="grade-7.html">Grade 7 </a>
+          <a href="grade-8.html">Grade 8 </a>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h2>Favorite Subjects</h2>
+    <p>As you can tell from the title, this page is going to be about my favorite subjects. I like studying and knowing about new things (my parents won't agree with that, but I do). And of all the subjects in the world, these are my favorite top 3 subjects:</p>
+    <ul>
+      <li>Math</li>
+      <p>If you want to learn more about this subject, <span class="blinking">visit this website:</span> <a href="https://en.wikipedia.org/wiki/Mathematics" target="_blank">Math</a></p>
+      <a href="https://en.wikipedia.org/wiki/Mathematics" target="_blank"><img src="math.jpg" alt="Mathematics" width="600"></a>
+      
+      <li>Chemistry</li>
+      <p>If you want to learn more about this subject, <span class="blinking">visit this website:</span> <a href="https://en.wikipedia.org/wiki/Chemistry" target="_blank">Chemistry</a></p>
+      <a href="https://en.wikipedia.org/wiki/Chemistry" target="_blank"><img src="chem.jpg" alt="Chemistry" width="600"></a>
+      
+      <li>Physics</li>
+      <p>If you want to learn more about this subject, <span class="blinking">visit this website:</span> <a href="https://en.wikipedia.org/wiki/Physics" target="_blank">Physics</a></p>
+      <a href="https://en.wikipedia.org/wiki/Physics" target="_blank"><img src="physics.png" alt="Physics" width="600"></a>
+    </ul>
+    <p> For Your Information, I am not a nerd. I still like doing           other things like:</p>
+    <ul>
+      <li>Hang out with friends</li>
+      <li>Play video games</li>
+    </ul>
+    <h4>This is what my day usually looks like :</h4>
+    <div id="piechart"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load google charts
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Draw the chart and set the chart values
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Study', 8],
+          ['Eat', 2],
+          ['Guitar', 1],
+          ['Play', 2],
+          ['Sleep', 11]
+          
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </body>
+</html>
