@@ -31,8 +31,13 @@ h1 {
 h3{
   color:ffff00;
 }
+h2{
+  padding-top:60px;
+}
 li {
   color:yellow;
+  padding-top: 150px;
+  text-align:left;
 }
 #p {
   color:#7fffd4;/*hexadecimal for turquiose(CC-regards)*/
@@ -128,4 +133,8 @@ button:hover{
 
 script{
   background-color: transparent
+}
+
+#meh{
+	padding-top: 10px;
 }
