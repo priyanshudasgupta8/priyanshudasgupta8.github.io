@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   background: #0f0c29;  
   background: -webkit-linear-gradient( #24243e, #302b63, #0f0c29);  
@@ -45,7 +49,6 @@ li {
 a {
   color:#40e0d0;
   text-align:center;
-  text-decoration: none;
 }
 img{
   border-color:black;
@@ -60,7 +63,7 @@ img{
 }
 .blinking{
   animation:blinkingText 1.2s infinite;
-  color:;
+  color: yellow;
 }
 @keyframes blinkingText{
   0%{     color: "yellow";}
