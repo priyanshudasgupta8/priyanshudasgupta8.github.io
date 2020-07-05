@@ -3,11 +3,7 @@
 }
 
 body {
-  background: #0f0c29;  
-  background: -webkit-linear-gradient( #24243e, #302b63, #0f0c29);  
-  background: linear-gradient(#24243e, #302b63, #0f0c29); 
-
-  color:#ffffff;
+  background: linear-gradient(to bottom, #000, #243B55);
 }
 .topnav a {
   float: center;
@@ -25,21 +21,21 @@ body {
   color: white;
 }
 p {
-  color: #ffff00;
+  color: lightpink;
 }
 h1 {
-  color: #ffff00;
+  color: lightpink;
   font-weight: bold;
   text-align: center;
 }
 h3{
-  color:ffff00;
+  color: aliceblue;
 }
 h2{
   padding-top:60px;
 }
 li {
-  color:yellow;
+  color:lightpink;
   padding-top: 150px;
   text-align:left;
 }
@@ -63,14 +59,14 @@ img{
 }
 .blinking{
   animation:blinkingText 1.2s infinite;
-  color: yellow;
+  color: lightpink;
 }
 @keyframes blinkingText{
-  0%{     color: "yellow";}
-  49%{    color: "yellow";}
+  0%{     color: "lightpink";}
+  49%{    color: "lightpink";}
   60%{    color: transparent;}
   40%{    color:transparent;}
-  100%{   color: "yellow";}
+  100%{   color: "lightpink";}
 }
 /* Dropdown Button */
 .dropbtn {
@@ -116,7 +112,9 @@ img{
                           color:#000000;
 }
 div{
-  color:#40e0d0;
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  color: lightpink;
 }
 
 button{
@@ -152,7 +150,7 @@ video {
   align-content: center;
   padding: 0;
   padding-left: 10px;
-  padding-bottom: 10  px;
+  padding-bottom: 10px;
 }
 
 .songHeading {
