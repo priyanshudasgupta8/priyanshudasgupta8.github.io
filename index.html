@@ -1,37 +1,619 @@
-<!DOCTYPE html> 
-<html>
-  <head>
-    <title>Priyan's Webpage</title>
-    <div class="topnav">
-      <a href="index.html" style="text-decoration: none;">Home Page </a> |
-      <a href="hobbies.html" style="text-decoration: none;">Hobbies </a> |
-      <a href="subjects.html" style="text-decoration: none;">Favorite Subjects </a> |
-      <div class="dropdown">
-        <button class="dropbtn">Projects</button>
-        <div class="dropdown-content">
-          <a href="grade-6.html">Grade 6</a>
-          <a href="grade-7.html">Grade 7 </a>
-          <a href="grade-8.html">Grade 8 </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Priyanshu Dasgupta</title>
+  <meta name="description" content="Priyanshu Dasgupta, physics at Princeton. Imaging, simulation, and machine learning for experimental physics.">
+  <meta property="og:title" content="Priyanshu Dasgupta">
+  <meta property="og:description" content="Physics at Princeton. Imaging, simulation, and machine learning for experimental physics.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#F2F4F7">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141A26'/%3E%3Cg fill='%23B4A0FF'%3E%3Ccircle cx='18' cy='20' r='3'/%3E%3Ccircle cx='32' cy='16' r='3'/%3E%3Ccircle cx='46' cy='22' r='3'/%3E%3Ccircle cx='22' cy='34' r='3'/%3E%3Ccircle cx='38' cy='31' r='3'/%3E%3Ccircle cx='17' cy='47' r='3'/%3E%3Ccircle cx='33' cy='46' r='3'/%3E%3Ccircle cx='48' cy='42' r='3'/%3E%3C/g%3E%3C/svg%3E">
+
+  <script>try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Palette: optical-bench white, deep ink, argon-discharge violet */
+    :root {
+      --paper: #F2F4F7;
+      --surface: #FFFFFF;
+      --ink: #141A26;
+      --muted: #59626F;
+      --rule: #D5DBE3;
+      --argon: #5B3CC4;
+      --argon-soft: #ECE6FB;
+      --dot: 20, 26, 38;
+      --dot-hot: 91, 60, 196;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #0F1420;
+        --surface: #161C2A;
+        --ink: #E8ECF3;
+        --muted: #A3ADBD;
+        --rule: #2A3242;
+        --argon: #B4A0FF;
+        --argon-soft: #241D42;
+        --dot: 232, 236, 243;
+        --dot-hot: 180, 160, 255;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --paper: #0F1420;
+      --surface: #161C2A;
+      --ink: #E8ECF3;
+      --muted: #A3ADBD;
+      --rule: #2A3242;
+      --argon: #B4A0FF;
+      --argon-soft: #241D42;
+      --dot: 232, 236, 243;
+      --dot-hot: 180, 160, 255;
+      color-scheme: dark;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Spectral", Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      font-feature-settings: "kern", "liga", "onum";
+    }
+    a { color: var(--argon); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 2px solid var(--argon); outline-offset: 3px; border-radius: 2px; }
+
+    .ui { font-family: "Schibsted Grotesk", system-ui, sans-serif; font-feature-settings: "tnum"; }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; font-size: 15px;
+    }
+    .nav .home { color: var(--ink); text-decoration: none; font-weight: 600; }
+    .nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; align-items: center; }
+    .nav ul a { color: var(--muted); text-decoration: none; }
+    .nav ul a:hover { color: var(--ink); }
+    .theme-btn {
+      font: inherit; color: var(--muted); background: none; border: 1px solid var(--rule);
+      border-radius: 999px; padding: 4px 12px; cursor: pointer;
+    }
+    .theme-btn:hover { color: var(--ink); border-color: var(--muted); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 56px 0 0; }
+    .hero h1 {
+      font-weight: 300;
+      font-size: clamp(52px, 9.5vw, 128px);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      margin: 0 0 28px;
+    }
+    .hero .lede {
+      font-size: clamp(20px, 2.3vw, 25px);
+      line-height: 1.45;
+      max-width: 34ch;
+      margin: 0 0 44px;
+      color: var(--ink);
+    }
+    .bos {
+      position: relative;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      height: clamp(260px, 38vw, 400px);
+      touch-action: pan-y;
+      cursor: crosshair;
+    }
+    .bos canvas { display: block; width: 100%; height: 100%; }
+    .bos-caption {
+      display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+      font-size: 14px; color: var(--muted); padding: 12px 0 0; line-height: 1.5;
+    }
+    .bos-caption p { margin: 0; max-width: 62ch; }
+
+    /* ---------- Sections ---------- */
+    section { padding: 96px 0 0; }
+    .row {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 48px;
+    }
+    .margin-label {
+      font-size: 15px; color: var(--muted); font-weight: 500;
+      padding-top: 10px; position: sticky; top: 24px; align-self: start;
+    }
+    h2 {
+      font-weight: 400; font-size: 39px; line-height: 1.15; letter-spacing: -0.01em;
+      margin: 0 0 32px; max-width: 22ch;
+    }
+    h3 { font-weight: 500; font-size: 23px; line-height: 1.3; margin: 0; }
+    p { margin: 0 0 16px; }
+    .prose { max-width: 64ch; }
+
+    /* ---------- Timeline ---------- */
+    .timeline { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--rule); }
+    .timeline li {
+      position: relative;
+      display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px;
+      padding: 0 0 36px 28px;
+    }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before {
+      content: ""; position: absolute; left: -5px; top: 11px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--paper); border: 1px solid var(--muted);
+    }
+    .timeline li.now::before { background: var(--argon); border-color: var(--argon); }
+    .timeline .when { font-size: 14px; color: var(--muted); padding-top: 5px; }
+    .timeline .where { color: var(--muted); font-style: italic; margin: 2px 0 8px; }
+    .timeline p { margin: 0; max-width: 60ch; }
+
+    /* ---------- Projects ---------- */
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--argon);
+      padding: 36px 40px;
+      margin: 0 0 48px;
+    }
+    .feature h3 { font-size: 31px; font-weight: 400; margin-bottom: 6px; }
+    .feature .sub { color: var(--muted); font-style: italic; margin: 0 0 20px; }
+    .feature p { max-width: 62ch; }
+    .parts {
+      list-style: none; margin: 24px 0; padding: 0;
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 36px;
+    }
+    .parts li { font-size: 16px; line-height: 1.5; }
+    .parts strong { display: block; font-weight: 600; }
+    .tech { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; font-size: 13px; }
+    .tech li { border: 1px solid var(--rule); border-radius: 999px; padding: 3px 11px; color: var(--muted); }
+    .repo-link { display: inline-block; margin-top: 22px; font-size: 15px; font-weight: 500; }
+
+    .projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+    .projects li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 190px;
+      gap: 8px 32px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .projects h3 a { color: var(--ink); text-decoration: none; }
+    .projects h3 a:hover { color: var(--argon); }
+    .projects p { margin: 6px 0 0; color: var(--ink); max-width: 60ch; font-size: 17px; }
+    .projects .meta { font-size: 14px; color: var(--muted); text-align: right; padding-top: 6px; }
+    .projects .meta a { display: block; margin-top: 4px; }
+    .more { margin-top: 24px; font-size: 15px; }
+
+    /* ---------- About ---------- */
+    .facts { list-style: none; margin: 28px 0 0; padding: 0; max-width: 64ch; }
+    .facts li {
+      display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px;
+      padding: 12px 0; border-top: 1px solid var(--rule); font-size: 17px;
+    }
+    .facts li:last-child { border-bottom: 1px solid var(--rule); }
+    .facts .k { font-size: 14px; color: var(--muted); padding-top: 3px; }
+
+    /* ---------- Contact ---------- */
+    .contact { padding-bottom: 96px; }
+    .contact h2 { font-size: clamp(39px, 5.4vw, 61px); font-weight: 300; max-width: 16ch; }
+    .email-line { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin: 8px 0 32px; }
+    .email-line a { font-size: clamp(22px, 3vw, 31px); }
+    .copy-btn {
+      font: 500 14px "Schibsted Grotesk", system-ui, sans-serif;
+      color: var(--ink); background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 999px; padding: 6px 14px; cursor: pointer;
+    }
+    .copy-btn:hover { border-color: var(--muted); }
+    .links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+    .links a {
+      display: inline-flex; align-items: center; gap: 8px;
+      font: 500 15px "Schibsted Grotesk", system-ui, sans-serif;
+      color: var(--ink); text-decoration: none;
+      border: 1px solid var(--rule); background: var(--surface);
+      border-radius: 999px; padding: 9px 18px;
+    }
+    .links a:hover { border-color: var(--argon); color: var(--argon); }
+    .links svg { width: 16px; height: 16px; }
+
+    footer { border-top: 1px solid var(--rule); padding: 24px 0 40px; font-size: 14px; color: var(--muted); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 860px) {
+      .row { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+      .margin-label { position: static; padding-top: 0; }
+      .parts { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 17px; }
+      .wrap { padding: 0 16px; }
+      .nav ul { gap: 14px; }
+      .nav ul li.hide-sm { display: none; }
+      .hero { padding-top: 32px; }
+      section { padding-top: 72px; }
+      h2 { font-size: 31px; }
+      .timeline li { grid-template-columns: minmax(0, 1fr); gap: 2px; padding-left: 22px; }
+      .timeline .when { padding-top: 0; }
+      .feature { padding: 26px 22px; }
+      .feature h3 { font-size: 26px; }
+      .projects li { grid-template-columns: minmax(0, 1fr); }
+      .projects .meta { text-align: left; padding-top: 0; }
+      .projects .meta a { display: inline; margin: 0 0 0 10px; }
+      .facts li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <nav class="nav ui" aria-label="Main">
+      <a class="home" href="#top">Priyanshu Dasgupta</a>
+      <ul>
+        <li class="hide-sm"><a href="#research">Research</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li class="hide-sm"><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button class="theme-btn" id="theme-btn" type="button" aria-label="Switch color theme">Dark</button></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main id="top">
+    <!-- ===== Hero ===== -->
+    <header class="hero">
+      <div class="wrap">
+        <h1>Priyanshu Dasgupta</h1>
+        <p class="lede">Physics at Princeton. I build imaging systems, simulations, and machine learning models for experimental physics.</p>
+      </div>
+      <div class="wrap">
+        <div class="bos" id="bos" role="img" aria-label="Interactive background-oriented Schlieren demo: a field of dots that shifts around a rising plume of warm air">
+          <canvas id="bos-canvas"></canvas>
+        </div>
+        <div class="bos-caption ui">
+          <p>Background-oriented Schlieren, live. A warm plume follows your cursor, and each dot shifts where the air's density gradient bends light. It's the method behind much of my research.</p>
+          <span id="bos-hint">Move or drag across the field</span>
         </div>
       </div>
-    </div>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h1>Welcome to My Website</h1>
-    <marquee behavior="scroll" direction="left" scrollamount="11.5"><h3>This website was created by Priyanshu</h3></marquee>
-    <img src="home.JPG" alt="avatar" class="pic">
-    <marquee behavior="scroll" direction="left" scrollamount="10"><p><strong><em>This web-page will mainly talk about myself and also about what I like.</em></strong><br><br><br></p></marquee>
-    <div align="center">This is the link to my GitHub, all my projects will be <a href="https://github.com/priyanshudasgupta8">here</a></div>
-    <div align="center">This is the link to my YouTube channel, videos about programming and playing the guitar are <a href="https://www.youtube.com/channel/UCiyIGr4KjhmdvhdL52xJO7A?view_as=subscriber">here</a></div>
-    <marquee behaviour="scroll" direction="up" scrollamount="1" >
-      <ul>
-        <p>Special and cordial thanks to:</p>
-        <li id="meh">Wikipedia</li>
-        <li id="meh">Creative Commons</li>
-		    <li id="meh">Epic Games</li>
-		    <li id="meh">EA Sports</li>
-      </ul>
-    </marquee>
-  </body>
+    </header>
+
+    <!-- ===== Research & experience ===== -->
+    <section id="research">
+      <div class="wrap row">
+        <div class="margin-label ui">Research &amp; experience</div>
+        <div>
+          <h2>Labs, teams, and the things I've measured.</h2>
+          <ol class="timeline" reversed>
+            <li class="now">
+              <span class="when ui">2026 – now</span>
+              <div>
+                <h3>Machine Learning Developer</h3>
+                <p class="where">Health-tech startup, <a href="https://tomosdevices.com" target="_blank" rel="noopener">tomosdevices.com</a></p>
+                <p>Building U-Net and LSTM models for a wearable that tracks blood pressure, SpO₂, and other cardiac signals from in-house hardware, benchmarked against EEG and ECG readings.</p>
+              </div>
+            </li>
+            <li class="now">
+              <span class="when ui">Sep 2026 – now</span>
+              <div>
+                <h3>Experimental Physicist and Data Analyst</h3>
+                <p class="where">Team USA, International Physicists' Tournament (Authentic Research Partners)</p>
+                <p>One of five members representing the U.S.; I run the modeling simulations behind the team's papers.</p>
+              </div>
+            </li>
+            <li>
+              <span class="when ui">Jul – Aug 2025</span>
+              <div>
+                <h3>Quarknet Particle Physics Program</h3>
+                <p class="where">Rutgers University–New Brunswick</p>
+                <p>Analyzed MINERvA neutrino data and Fermilab accelerator data, detected muons with scintillators, and gave a talk to more than 100 people on Grover's algorithm in Qiskit.</p>
+              </div>
+            </li>
+            <li>
+              <span class="when ui">Jun 2024 – Aug 2025</span>
+              <div>
+                <h3>Student Researcher</h3>
+                <p class="where">Mikhailova ETOILES Lab and Fleischer Imaging Lab, Princeton University</p>
+                <p>Imaged an argon current-carrying plasma double layer with Schlieren imaging and two-color interferometry, and wrote Schlieren airflow algorithms in MATLAB and Python for 3D models of aircraft turbulence. First author and presenter of a nonlinear optics poster at the APS 66th Annual Division of Plasma Physics meeting.</p>
+              </div>
+            </li>
+            <li>
+              <span class="when ui">Mar – Sep 2024</span>
+              <div>
+                <h3>Student Research Assistant</h3>
+                <p class="where">Nokia Bell Labs, with Dr. Yury Deshko</p>
+                <p>Studied the zero phonon line in CVD-grown diamond implanted with Xe⁺ ions, and modeled V-Xe-V "artificial atom" centers and their interactions with the lattice in Python and MATLAB.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section id="projects">
+      <div class="wrap row">
+        <div class="margin-label ui">Projects</div>
+        <div>
+          <h2>Code I've written, from optics benches to web apps.</h2>
+
+          <article class="feature">
+            <h3>Schlieren imaging toolkit</h3>
+            <p class="sub">The code behind my Schlieren research and the STREAMS fan array</p>
+            <p>A full pipeline for seeing airflow: capture a background, measure how a density gradient displaces it, and turn that displacement into an image of the flow. It runs on a webcam outdoors as well as in the lab.</p>
+            <ul class="parts">
+              <li><strong>Background-oriented Schlieren</strong>OpenCV processing of live webcam video, with Kalman-filter tracking and wavelength-coded color backgrounds.</li>
+              <li><strong>MATLAB simulations</strong>Lens optics and air-density gradient models used to design the imaging setup.</li>
+              <li><strong>STREAMS fan array</strong>A programmable, modular wind-tunnel fan array driven by Arduino PWM, with a 3D control GUI. Filed as a provisional patent.</li>
+              <li><strong>Live feed</strong>A Flask site and an Android app that stream the processed Schlieren video.</li>
+            </ul>
+            <ul class="tech ui" aria-label="Technologies">
+              <li>Python</li><li>OpenCV</li><li>MATLAB</li><li>Arduino</li><li>Flask</li><li>Android</li>
+            </ul>
+            <a class="repo-link ui" href="https://github.com/priyanshudasgupta8/schlierensims-paper-patent" target="_blank" rel="noopener">View the repository on GitHub</a>
+          </article>
+
+          <ul class="projects">
+            <li>
+              <div>
+                <h3><a href="https://github.com/priyanshudasgupta8/demomolecmodeling" target="_blank" rel="noopener">3D molecule modeler</a></h3>
+                <p>A desktop app that builds molecules in 3D from atoms and bonds, with a distinct material for each element.</p>
+              </div>
+              <div class="meta ui">Java, JavaFX<a href="https://github.com/priyanshudasgupta8/demomolecmodeling" target="_blank" rel="noopener">Repository</a></div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="https://github.com/priyanshudasgupta8/Rubiks-Cube-Solver-3D" target="_blank" rel="noopener">3D Rubik's cube solver</a></h3>
+                <p>An interactive 3D Rubik's cube with a neural-network solver.</p>
+              </div>
+              <div class="meta ui">Processing<a href="https://github.com/priyanshudasgupta8/Rubiks-Cube-Solver-3D" target="_blank" rel="noopener">Repository</a></div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="https://github.com/priyanshudasgupta8/Star-Data-API" target="_blank" rel="noopener">Star data pipeline</a></h3>
+                <p>Scrapes, cleans, and merges star catalog data, converts mass and radius to SI units to compute surface gravity, charts the results, and serves them through a Flask API.</p>
+              </div>
+              <div class="meta ui">Python, pandas, Flask<a href="https://github.com/priyanshudasgupta8/Star-Data-API" target="_blank" rel="noopener">Repository</a></div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="https://github.com/priyanshudasgupta8/Flask-Alphabet-Classifier" target="_blank" rel="noopener">Live handwriting recognition</a></h3>
+                <p>A scikit-learn classifier trained on MNIST and served through Flask, paired with a React Native camera app that sends it images to read.</p>
+              </div>
+              <div class="meta ui">Python, scikit-learn, React Native<a href="https://github.com/priyanshudasgupta8/Live-Image-Prediction" target="_blank" rel="noopener">App repository</a></div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="https://github.com/priyanshudasgupta8/manage-ez" target="_blank" rel="noopener">ManageEZ</a></h3>
+                <p>A Flask web app that automates day-to-day management for rental communities. <a href="https://youtu.be/E73S_C6QnYc" target="_blank" rel="noopener">Watch the demo</a>.</p>
+              </div>
+              <div class="meta ui">Python, Flask, SQLite<a href="https://github.com/priyanshudasgupta8/manage-ez" target="_blank" rel="noopener">Repository</a></div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="https://github.com/priyanshudasgupta8/Web-IDE" target="_blank" rel="noopener">Web IDE</a></h3>
+                <p>My DVHacks III submission: a browser IDE for HTML, CSS, and JavaScript with live output and a speech-driven rubber-duck debugger.</p>
+              </div>
+              <div class="meta ui">JavaScript<a href="https://github.com/priyanshudasgupta8/Web-IDE" target="_blank" rel="noopener">Repository</a></div>
+            </li>
+          </ul>
+          <p class="more ui"><a href="https://github.com/priyanshudasgupta8?tab=repositories" target="_blank" rel="noopener">See all repositories on GitHub</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section id="about">
+      <div class="wrap row">
+        <div class="margin-label ui">About</div>
+        <div>
+          <h2>A first-year who likes to see how things work.</h2>
+          <div class="prose">
+            <p>I'm studying physics at Princeton, with minors in materials science and in optimization and quantitative decision science. Most of my work comes down to one loop: build a model of something messy, measure it, and find out where the model is wrong.</p>
+            <p>Outside the lab, I sing with Tarana, play lead guitar in an Indo-rock band, co-founded a catering business that supports families in Kolkata, and spent four years teaching English to refugees.</p>
+          </div>
+          <ul class="facts">
+            <li><span class="k ui">Honors</span><span>USA Physics Olympiad Gold Medal (2026); USA Computing Olympiad, Gold Division (2025)</span></li>
+            <li><span class="k ui">Competition</span><span>Captained my high school Science Olympiad team to 4th, 10th, and 7th at Nationals</span></li>
+            <li><span class="k ui">Princeton</span><span>PHY 105 course assistant, physics department web development, Electric Speedboating autonomy team, HackPrinceton</span></li>
+            <li><span class="k ui">Tools</span><span>Python, MATLAB, Java, PyTorch, scikit-learn, OpenCV, Qiskit, Flask, React</span></li>
+            <li><span class="k ui">Languages</span><span>English, Bengali, and Hindi; professional Spanish; some Russian</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="contact">
+      <div class="wrap row">
+        <div class="margin-label ui">Contact</div>
+        <div>
+          <h2>Get in touch.</h2>
+          <p class="prose">I'm looking for research positions and internships for summer 2027. Email is the best way to reach me.</p>
+          <div class="email-line">
+            <a href="mailto:priyanshu@princeton.edu">priyanshu@princeton.edu</a>
+            <button class="copy-btn" id="copy-email" type="button">Copy email</button>
+          </div>
+          <ul class="links">
+            <li><a href="https://www.linkedin.com/in/priyanshu-dasgupta-a95588289/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn</a></li>
+            <li><a href="https://github.com/priyanshudasgupta8" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub</a></li>
+            <li><a href="resume.pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15l3 3 3-3"/></svg>
+              Résumé (PDF)</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap ui">© 2026 Priyanshu Dasgupta</div>
+  </footer>
+
+  <script>
+  (function () {
+    /* ---------- Theme toggle ---------- */
+    var root = document.documentElement;
+    var btn = document.getElementById('theme-btn');
+    function isDark() {
+      var t = root.getAttribute('data-theme');
+      if (t) return t === 'dark';
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function syncBtn() { btn.textContent = isDark() ? 'Light' : 'Dark'; }
+    syncBtn();
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      syncBtn(); readColors();
+    });
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { syncBtn(); readColors(); });
+    }
+
+    /* ---------- Copy email ---------- */
+    var copyBtn = document.getElementById('copy-email');
+    copyBtn.addEventListener('click', function () {
+      var addr = 'priyanshu@princeton.edu';
+      function done() { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 1800); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done, function () { window.location.href = 'mailto:' + addr; });
+      } else { window.location.href = 'mailto:' + addr; }
+    });
+
+    /* ---------- Hide the résumé link until resume.pdf is uploaded ---------- */
+    var resumeLink = document.querySelector('a[href="resume.pdf"]');
+    if (resumeLink && location.protocol !== 'file:') {
+      fetch('resume.pdf', { method: 'HEAD' }).then(function (r) {
+        if (!r.ok) resumeLink.parentNode.style.display = 'none';
+      }).catch(function () {});
+    }
+
+    /* ---------- Background-oriented Schlieren demo ----------
+       A random-dot background is displaced in proportion to the gradient of a
+       density field: a rising plume of Gaussian puffs centred on the pointer. */
+    var box = document.getElementById('bos');
+    var canvas = document.getElementById('bos-canvas');
+    var ctx = canvas.getContext('2d');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W = 0, H = 0, dpr = 1, dots = [], colDot = '20,26,38', colHot = '91,60,196';
+
+    function readColors() {
+      var cs = getComputedStyle(root);
+      colDot = cs.getPropertyValue('--dot').trim() || colDot;
+      colHot = cs.getPropertyValue('--dot-hot').trim() || colHot;
+      if (reduce) draw(performance.now());
+    }
+
+    var seed = 7;
+    function rand() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+
+    function resize() {
+      var r = box.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height;
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed = 7; dots = [];
+      var spacing = W < 640 ? 9 : 10;
+      for (var y = spacing / 2; y < H; y += spacing) {
+        for (var x = spacing / 2; x < W; x += spacing) {
+          dots.push([x + (rand() - 0.5) * spacing * 0.9, y + (rand() - 0.5) * spacing * 0.9, 0.9 + rand() * 0.8]);
+        }
+      }
+      if (reduce) draw(performance.now());
+    }
+
+    // Plume source eases toward the pointer; drifts on its own when idle
+    var src = { x: 0, y: 0, tx: 0, ty: 0, active: false, lastMove: 0, init: false };
+    function setTarget(e) {
+      var r = box.getBoundingClientRect();
+      src.tx = e.clientX - r.left; src.ty = e.clientY - r.top;
+      src.active = true; src.lastMove = performance.now();
+      var hint = document.getElementById('bos-hint'); if (hint) hint.style.visibility = 'hidden';
+    }
+    box.addEventListener('pointermove', setTarget);
+    box.addEventListener('pointerdown', setTarget);
+    box.addEventListener('pointerleave', function () { src.active = false; });
+
+    function puffs(t) {
+      var list = [], n = 8, gap = Math.max(28, H * 0.11), rise = (t * 0.045) % gap;
+      for (var i = 0; i < n; i++) {
+        var k = i + rise / gap;
+        var sigma = 16 + k * 7.5;
+        var amp = 1 / (1 + k * 0.35);
+        var wob = Math.sin(t * 0.0021 + i * 1.3) * (4 + k * 3.2);
+        list.push([src.x + wob, src.y - k * gap, sigma, amp]);
+      }
+      return list;
+    }
+
+    function draw(t) {
+      if (!src.init) { src.x = src.tx = W * 0.62; src.y = src.ty = H * 0.82; src.init = true; }
+      if (!src.active || t - src.lastMove > 2500) {
+        src.tx = W * (0.5 + 0.28 * Math.sin(t * 0.00023));
+        src.ty = H * (0.80 + 0.06 * Math.sin(t * 0.00041));
+      }
+      src.x += (src.tx - src.x) * 0.08; src.y += (src.ty - src.y) * 0.08;
+
+      ctx.clearRect(0, 0, W, H);
+      var P = puffs(reduce ? 0 : t), np = P.length, gain = 360;
+      var buckets = [[], [], [], []];
+      for (var d = 0; d < dots.length; d++) {
+        var px = dots[d][0], py = dots[d][1], gx = 0, gy = 0;
+        for (var j = 0; j < np; j++) {
+          var dx = px - P[j][0], dy = py - P[j][1], s2 = P[j][2] * P[j][2];
+          var r2 = dx * dx + dy * dy;
+          if (r2 > 9 * s2) continue;
+          var g = P[j][3] * Math.exp(-r2 / (2 * s2)) / s2;
+          gx -= g * dx; gy -= g * dy;
+        }
+        var ox = gx * gain, oy = gy * gain, mag = Math.sqrt(ox * ox + oy * oy);
+        var b = mag < 0.6 ? 0 : mag < 2.5 ? 1 : mag < 5 ? 2 : 3;
+        buckets[b].push(px - ox, py - oy, dots[d][2]);
+      }
+      var styles = ['rgba(' + colDot + ',0.38)', 'rgba(' + colHot + ',0.55)', 'rgba(' + colHot + ',0.8)', 'rgba(' + colHot + ',1)'];
+      for (var bi = 0; bi < 4; bi++) {
+        var arr = buckets[bi]; if (!arr.length) continue;
+        ctx.fillStyle = styles[bi]; ctx.beginPath();
+        for (var a = 0; a < arr.length; a += 3) { ctx.moveTo(arr[a] + arr[a + 2], arr[a + 1]); ctx.arc(arr[a], arr[a + 1], arr[a + 2], 0, 6.2832); }
+        ctx.fill();
+      }
+    }
+
+    var running = false, visible = true;
+    function loop(t) { if (!running) return; draw(t); requestAnimationFrame(loop); }
+    function start() { if (!running && visible && !reduce) { running = true; requestAnimationFrame(loop); } }
+    function stop() { running = false; }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; visible ? start() : stop(); }).observe(box);
+    }
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+    window.addEventListener('resize', resize);
+
+    readColors(); resize();
+    if (reduce) {
+      box.addEventListener('pointermove', function () { draw(performance.now()); });
+      draw(0);
+    } else { start(); }
+  })();
+  </script>
+</body>
 </html>
